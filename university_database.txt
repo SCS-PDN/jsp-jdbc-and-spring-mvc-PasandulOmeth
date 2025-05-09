@@ -1,0 +1,96 @@
+mysql> CREATE DATABASE university_db
+    -> ;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> CREAT TABLE student (
+    -> student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(100) NOT NULL,
+    -> email VARCHAR(100) NOT NULL,
+    -> password VARCHAR(100) NOT NULL
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREAT TABLE student (
+student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name V' at line 1
+mysql> CREATE TABLE student (
+    -> student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(100) NOT NULL,
+    -> email VARCHAR(100) NOT NULL,
+    -> password VARCHAR(100) NOT NULL
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> USE university_db;
+Database changed
+mysql> CREATE TABLE student (
+    -> student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(100) NOT NULL,
+    -> email VARCHAR(100) NOT NULL,
+    -> password VARCHAR(100) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE courses (
+    -> course_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(100) NOT NULL,
+    -> instructor VARCHAR(100),
+    ->  credits INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE registrations (
+    ->     reg_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->   student_id INT,
+    -> 
+    ->   course_id INT,
+    ->  date DATE,
+    -> FOREIGN KEY (student_id) REFERENCES students(student_id),
+    ->  FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'students'
+mysql> CREATE TABLE registrations (
+    -> reg_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> student_id INT,
+    -> course_id INT,
+    -> date DATE,
+    -> FOREIGN KEY (student_id) REFERENCES students(student_id),
+    -> FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'students'
+mysql> CREATE TABLE registrations (
+    -> reg_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> student_id INT,
+    -> course_id INT,
+    -> date DATE,
+    -> FOREIGN KEY (student_id) REFERENCES student(student_id),
+    -> FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO students (name, email, password) VALUES 
+    -> ('Janith Somapala','Janith@example.com','JN123'),
+    -> ('Vikum Senevirathne','Vikum@example.com','VK123');
+ERROR 1146 (42S02): Table 'university_db.students' doesn't exist
+mysql> INSERT INTO students (name, email, password) VALUES 
+    -> ('Vikum Senevirathne','Vikum@example.com','VK12;
+    '> 
+    '> ;
+    '> );
+    '> );
+    '> ;
+    '> );
+    '> ^C
+mysql> INSERT INTO student (name, email, password) VALUES
+    -> ('Janith Somapala','Janith@example.com','JN123'),
+    -> ('Vikum Senevirathne','Vikum@example.com','VK12');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO courses (name, instructor, credits) VALUES
+    -> ('Software Engineering','Dr.D silva',3),
+    -> ('Database Systems','Prof. K Perera',4),
+    -> ('Network Security','Ms. A Fernando',3);
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> git --status
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'git --status' at line 1
